@@ -1,6 +1,11 @@
 # Ciclic
 Este aplicacão é um simulador de investimento feito em React. A aplicacão tem três telas. (Layout somente mobile)
 
+#### Estudos aplicados
+- React 
+- React Router
+- Styled Components
+
 ## Primeira tela
 A primeira tela contém um formulário com campos `nome`, `mensalidade`, `tempo de contribuicão` e um botão `simular`.
 
