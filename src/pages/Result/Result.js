@@ -1,10 +1,15 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext } from "react";
 import Header from "../../components/Header/Header";
+import { UserContext } from "../../contexts/Context";
 import { ButtonReturn, Container, Description } from "./Result.style";
 
 function Result() {
-    const { name, payment, time, result } = useParams();
+    const {
+        currentName,
+        currentPayment,
+        currentResult, 
+        currentTime, 
+    } = useContext(UserContext);
 
     return (
         <>
@@ -12,7 +17,7 @@ function Result() {
 
             <Container>
                 <Description>
-                    Olá, {name}. Juntando {payment} todo mês, você terá R$ {Number(result).toFixed(2)} em {time} anos. 
+                    Olá, {currentName}. Juntando {currentPayment} todo mês, você terá R$ {Number(currentResult).toFixed(2)} em {currentTime} {currentTime > 1 ? "anos" : "ano"}. 
                 </Description>
 
                 <ButtonReturn to="/">Simular novamente</ButtonReturn>

@@ -4,6 +4,7 @@ import Result from "../pages/Result/Result";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Context from "../contexts/Context";
 
 function Router() {
 
@@ -14,13 +15,19 @@ function Router() {
             errorElement: <ErrorPage />
         },
         {
-            path: "/result/:name/:payment/:time/:result",
+            path: "/result",
             element: <Result />,
+        },
+        {
+            path: "/error",
+            element: <ErrorPage />,
         },
     ]);
 
     return (
-        <RouterProvider router={router} />
+        <Context>
+            <RouterProvider router={router} />
+        </Context>
     )
 }
 
