@@ -1,8 +1,23 @@
-import React, { createContext, useState } from "react";
+import React, { ReactNode, createContext, useState } from "react";
 
-export const UserContext = createContext(0);
+interface MyContextProps {
+    currentName: string;
+    setCurrentName: (currentName: string) => void;
+    currentPayment: string;
+    setCurrentPayment: (currentPayment: string) => void;
+    currentResult: string;
+    setCurrentResult: (currentResult: string) => void;
+    currentTime: string;
+    setCurrentTime: (currentTime: string) => void;
+}
 
-export default function Context({ children }) {
+interface MyProviderProps {
+    children: ReactNode;
+}
+
+export const UserContext = createContext({} as MyContextProps);
+
+export default function Context({ children }: MyProviderProps) {
     const [currentName, setCurrentName] = useState("");
     const [currentPayment, setCurrentPayment] = useState("");
     const [currentResult, setCurrentResult] = useState("");

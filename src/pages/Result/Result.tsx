@@ -17,7 +17,7 @@ function Result() {
 
             <Container>
                 <Description>
-                    Olá, {currentName}. Juntando {currentPayment} todo mês, você terá R$ {Number(currentResult).toFixed(2)} em {currentTime} {currentTime > 1 ? "anos" : "ano"}. 
+                    Olá, {currentName}. Juntando {currentPayment} todo mês, você terá R$ {Number(currentResult).toFixed(2)} em {currentTime} {Number(currentTime) > 1 ? "anos" : "ano"}. 
                 </Description>
 
                 <ButtonReturn to="/">Simular novamente</ButtonReturn>

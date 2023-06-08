@@ -14,14 +14,17 @@ import {
 } from "./Simulator.style";
 
 function Simulator() {
-    const [name, setName] = useState("");
-    const [payment, setPayment] = useState("");
-    const [time, setTime] = useState("1");
+    const [name, setName] = useState<string>("");
+    const [payment, setPayment] = useState<string>("");
+    const [time, setTime] = useState<string>("1");
 
     let fees = 0.00517;
     let cleanTime = time.replace("ano", "").replace("anos", "");
     let cleanPayment = payment.replace("R$ ", "");
-    let calculation;
+
+    let calculation: {
+        "expr": string;
+    };
 
     const {
         setCurrentName,
@@ -32,41 +35,47 @@ function Simulator() {
 
     let navigate = useNavigate();
 
-    const simulation = (payment, fees, time) => {
-        return calculation = {"expr": `${Number(payment)} * (((1 + ${fees}) ^ ${Number(time) * 12} - 1) / ${fees})`};
+    const simulation = (payment: string, fees: number, time: string) => {
+        return calculation = {"expr": `${payment} * (((1 + ${fees}) ^ ${Number(time) * 12} - 1) / ${fees})`};
     }
 
-    const sendSimulation = async (e) => {
+    const sendSimulation = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
 
         simulation(cleanPayment, fees, cleanTime);
 
-        let response = await fetch("http://api.mathjs.org/v4/", {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-            body: JSON.stringify(calculation),
-        });
-
-        let simulationResponse = await response.json();
-
-        let result = simulationResponse.result;
-
-        if(response.ok && Number(cleanPayment) > 0) {
-            setName("");
-            setPayment("");
-            setTime("1");
-
-            // CONTEXT
-            setCurrentName(name.length > 0 ? name : "pessoa");
-            setCurrentPayment(payment);
-            setCurrentTime(time);
-            setCurrentResult(result);
-
-            return navigate("/result");
-        } else {
-            return navigate("/error");
+        try {
+            let response = await fetch("http://api.mathjs.org/v4/", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json",
+                },
+                body: JSON.stringify(calculation),
+            });
+    
+            let simulationResponse = await response.json();
+    
+            let result = simulationResponse.result;
+    
+            if(response.ok) {
+                setName("");
+                setPayment("");
+                setTime("1");
+    
+                // CONTEXT
+                setCurrentName(name.length > 0 ? name : "pessoa");
+                setCurrentPayment(payment);
+                setCurrentTime(time);
+                setCurrentResult(result);
+    
+                return navigate("/result");
+            } else if(response.status === 400) {
+                return navigate("/error");
+            } else {
+                return navigate("/error");
+            }
+        } catch (error) {
+            console.log(error)
         }
     }
 
