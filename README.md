@@ -3,7 +3,7 @@ Este aplicacão é um simulador de investimento feito em React. A aplicacão tem
 
 #### Estudos aplicados
 - React 
-- React Router
+- Typescript
 - Styled Components
 
 ## Primeira tela
