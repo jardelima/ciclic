@@ -1,5 +1,5 @@
 # Ciclic
-Este aplicacão é um simulador de investimento feito em React. A aplicacão tem três telas. (Layout somente mobile)
+Este aplicacão é um simulador de investimento feito em React. A aplicacão tem três telas.
 
 #### Estudos aplicados
 - React 
