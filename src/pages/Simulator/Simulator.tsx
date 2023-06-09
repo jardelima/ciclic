@@ -45,7 +45,7 @@ function Simulator() {
         simulation(cleanPayment, fees, cleanTime);
 
         try {
-            let response = await fetch("http://api.mathjs.org/v4/", {
+            let response = await fetch("https://api.mathjs.org/v4/", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
